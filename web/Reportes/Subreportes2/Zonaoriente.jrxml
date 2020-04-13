@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="612" pageHeight="792" columnWidth="612" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="6c9c3d12-6da4-49ae-894d-661edfd3a719">
+	<property name="ireport.zoom" value="1.771561000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+YEAR(CURDATE())-YEAR(familiar.`fechanac`)+IF(DATE_FORMAT(CURDATE(),'%m-%d')>DATE_FORMAT(familiar.`fechanac`,'%m-%d'),0,-1) AS edad,
+     familiar.`id` AS familiar_id,
+     familiar.`nombre` AS familiar_nombre,
+     familiar.`apaterno` AS familiar_apaterno,
+     familiar.`amaterno` AS familiar_amaterno,
+     familiar.`correo` AS familiar_correo,
+     familiar.`fechanac` AS familiar_fechanac,
+     familiar.`municipio` AS familiar_municipio,
+     familiar.`telefono` AS familiar_telefono,
+     vivienda.`id` AS vivienda_id,
+     vivienda.`material_piso` AS vivienda_material_piso,
+     vivienda.`material_pared` AS vivienda_material_pared,
+     vivienda.`acabado_pared` AS vivienda_acabado_pared,
+     vivienda.`material_techo` AS vivienda_material_techo,
+     vivienda.`tipo_sanitario` AS vivienda_tipo_sanitario,
+     vivienda.`drenaje` AS vivienda_drenaje,
+     vivienda.`familiar_idfamiliar` AS vivienda_familiar_idfamiliar,
+     probabilidad.`id` AS probabilidad_id,
+     probabilidad.`bayessi` AS probabilidad_bayessi,
+     probabilidad.`bayesno` AS probabilidad_bayesno,
+     probabilidad.`arbolsi` AS probabilidad_arbolsi,
+     probabilidad.`arbolno` AS probabilidad_arbolno,
+     probabilidad.`fecha_reg` AS probabilidad_fecha_reg,
+     probabilidad.`vivienda_idvivienda` AS probabilidad_vivienda_idvivienda
+FROM
+     `vivienda` vivienda INNER JOIN `familiar` familiar ON vivienda.`familiar_idfamiliar` = familiar.`id`
+     INNER JOIN `probabilidad` probabilidad ON vivienda.`id` = probabilidad.`vivienda_idvivienda`
+WHERE
+     familiar.`municipio` IN ('Zacualpan de Amilpas','Jantetelco','Jonacatepec de Leandro Valle','Tepalcingo','Axochiapan','Temoac','Hueyapan')
+GROUP BY familiar.`id`]]>
+	</queryString>
+	<field name="edad" class="java.lang.Integer"/>
+	<field name="familiar_id" class="java.lang.Integer"/>
+	<field name="familiar_nombre" class="java.lang.String"/>
+	<field name="familiar_apaterno" class="java.lang.String"/>
+	<field name="familiar_amaterno" class="java.lang.String"/>
+	<field name="familiar_correo" class="java.lang.String"/>
+	<field name="familiar_fechanac" class="java.sql.Date"/>
+	<field name="familiar_municipio" class="java.lang.String"/>
+	<field name="familiar_telefono" class="java.lang.String"/>
+	<field name="vivienda_id" class="java.lang.Integer"/>
+	<field name="vivienda_material_piso" class="java.lang.String"/>
+	<field name="vivienda_material_pared" class="java.lang.String"/>
+	<field name="vivienda_acabado_pared" class="java.lang.String"/>
+	<field name="vivienda_material_techo" class="java.lang.String"/>
+	<field name="vivienda_tipo_sanitario" class="java.lang.String"/>
+	<field name="vivienda_drenaje" class="java.lang.String"/>
+	<field name="vivienda_familiar_idfamiliar" class="java.lang.Integer"/>
+	<field name="probabilidad_id" class="java.lang.Integer"/>
+	<field name="probabilidad_bayessi" class="java.lang.Double"/>
+	<field name="probabilidad_bayesno" class="java.lang.Double"/>
+	<field name="probabilidad_arbolsi" class="java.lang.Double"/>
+	<field name="probabilidad_arbolno" class="java.lang.Double"/>
+	<field name="probabilidad_fecha_reg" class="java.sql.Timestamp"/>
+	<field name="probabilidad_vivienda_idvivienda" class="java.lang.Integer"/>
+	<variable name="edad_1" class="java.lang.Integer" calculation="Average">
+		<variableExpression><![CDATA[$F{edad}]]></variableExpression>
+	</variable>
+	<title>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="13" y="3" width="121" height="27" uuid="d75be58d-f27a-4248-9c10-baac2d0a5088"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Zona Oriente]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<rectangle radius="5">
+				<reportElement x="1" y="3" width="562" height="24" backcolor="#CCFFCC" uuid="84cedc3d-fd94-43df-989d-67739f17591a"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="81" y="7" width="109" height="20" uuid="658f2594-a77a-4364-b041-71d80c23fddb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="352" y="7" width="81" height="20" uuid="3f3e7310-033f-407e-870e-ac625e7b784b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Municipio]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="505" y="7" width="74" height="20" uuid="66b58aa7-c7ea-4127-a4af-86789a40962e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Edad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="7" width="71" height="20" uuid="66c1a230-453a-45c9-a8de-2007d8aa4fb3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[ID Vivienda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="271" y="7" width="81" height="20" uuid="a5ae1abb-c52e-4312-85e4-9998437fc949"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Materno]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="190" y="7" width="81" height="20" uuid="d590d397-e522-4f9b-9b4e-c8c38b159330"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Paterno]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="431" y="7" width="74" height="20" uuid="0e08a56d-9913-4479-a89c-69aff20d4dc7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Probabilidad]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="431" y="0" width="74" height="20" uuid="df75c103-5503-4686-bbca-0f43c0ac1117"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{probabilidad_bayessi}+" %"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="352" y="0" width="79" height="20" uuid="25a0bb9f-a5eb-4d47-ae0f-96f178a27fc0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{familiar_municipio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="0" width="71" height="20" uuid="2d71b8c5-0f8c-4972-aa16-6edadb674f12"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vivienda_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="190" y="0" width="81" height="20" uuid="409ff7e4-8f5b-4da2-986a-67908c5247a1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{familiar_apaterno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="81" y="0" width="109" height="20" uuid="435d5b3d-f219-408d-825a-7e40ca7a10b6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{familiar_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="271" y="0" width="81" height="20" uuid="3d08a868-ccf6-4533-9148-532d55480516"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{familiar_amaterno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="505" y="0" width="58" height="20" uuid="2101fc03-7f38-44a8-9064-605388dd61a9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{edad}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="32">
+			<textField>
+				<reportElement x="534" y="10" width="45" height="20" uuid="413923b8-0cf7-4433-a421-6bdb6d5b6177"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="449" y="10" width="69" height="20" uuid="313d3fdc-8b8f-45f8-b0c3-cb3b1985c0af"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Total Zona:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="6" width="562" height="1" uuid="f6a3f7bd-79ea-42f1-be4d-d150f1885724"/>
+			</line>
+			<staticText>
+				<reportElement x="25" y="11" width="125" height="20" uuid="f0f50c9d-ef1a-4451-95e6-1cdf87f7a4fd"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Edad Promedio Zona:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="167" y="12" width="100" height="20" uuid="e5cd0aae-e8b6-45c9-b2d8-9350186f5c10"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{edad_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

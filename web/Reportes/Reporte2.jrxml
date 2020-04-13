@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="9785affe-e118-4b26-abb6-6bb301035174">
+	<property name="ireport.zoom" value="1.6105100000000008"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="468"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\marco\\OneDrive\\Documentos\\SistemaExperto\\web\\Reportes\\Subreportes\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     familiar.`id` AS familiar_id,
+     familiar.`nombre` AS familiar_nombre,
+     familiar.`apaterno` AS familiar_apaterno,
+     familiar.`amaterno` AS familiar_amaterno,
+     familiar.`correo` AS familiar_correo,
+     familiar.`fechanac` AS familiar_fechanac,
+     familiar.`municipio` AS familiar_municipio,
+     familiar.`telefono` AS familiar_telefono,
+     Count(*) AS Total
+FROM
+     `familiar` familiar
+ORDER BY
+      familiar.`municipio`]]>
+	</queryString>
+	<field name="familiar_id" class="java.lang.Integer"/>
+	<field name="familiar_nombre" class="java.lang.String"/>
+	<field name="familiar_apaterno" class="java.lang.String"/>
+	<field name="familiar_amaterno" class="java.lang.String"/>
+	<field name="familiar_correo" class="java.lang.String"/>
+	<field name="familiar_fechanac" class="java.sql.Date"/>
+	<field name="familiar_municipio" class="java.lang.String"/>
+	<field name="familiar_telefono" class="java.lang.String"/>
+	<field name="Total" class="java.lang.Long"/>
+	<group name="familiar_municipio">
+		<groupExpression><![CDATA[$F{familiar_municipio}]]></groupExpression>
+	</group>
+	<group name="Municipio">
+		<groupExpression><![CDATA[$F{familiar_municipio}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="88" splitType="Stretch">
+			<rectangle radius="5">
+				<reportElement x="-1" y="61" width="573" height="27" forecolor="#F0F0F0" backcolor="#666666" uuid="30e34d63-fd3e-4a84-8d02-6aef27761f90"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="332" y="36" width="41" height="18" uuid="5938ac65-df48-4dca-9ca4-99df6068b6f8"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<rectangle radius="5">
+				<reportElement x="0" y="1" width="573" height="59" forecolor="#333333" backcolor="#F0F0F0" uuid="77cf5172-a681-4749-bbc5-7164b9095618"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="13" y="6" width="308" height="50" uuid="98d7b6ce-1ef5-44f8-b64a-542f094fef1f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Sistema experto que permite identificar la potencialidad de presentar enfermedades transmitidas por vector considerando la información de la infraestructura de la vivienda]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="356" y="7" width="157" height="32" uuid="bdd2a1c4-ebb9-4cec-8932-81c25575cdd7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Sistema Experto]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy hh:mm aa">
+				<reportElement x="373" y="36" width="182" height="18" uuid="850b1069-8c42-4856-9c95-e297e59dfb52"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="373" y="65" width="190" height="20" forecolor="#FFFFFF" uuid="bb4cd6a4-9129-4f57-85c4-ad9c71d01b24"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[FAMILIARES POR REGIÓN]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="603" splitType="Stretch">
+			<subreport>
+				<reportElement x="4" y="5" width="564" height="136" uuid="5445ee45-28e7-469a-b970-98e645c26a10"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["..\\Reportes\\Subreportes\\Zonanorte.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="4" y="141" width="564" height="149" uuid="f9433ed9-3c1f-4162-ae8d-9d0d86e049ee"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["..\\Reportes\\Subreportes\\Zonaoriente.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="4" y="290" width="564" height="148" uuid="872b473a-ac1f-44af-b6e1-e3fb7ab55782"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["..\\Reportes\\Subreportes\\Zonasureste.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="4" y="438" width="564" height="165" uuid="341f3672-f8c0-444e-ba18-a4f71ae6ee02"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["..\\Reportes\\Subreportes\\Zonacentro.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</columnHeader>
+	<pageFooter>
+		<band height="61" splitType="Stretch">
+			<rectangle radius="5">
+				<reportElement x="0" y="3" width="572" height="33" forecolor="#333333" backcolor="#F0F0F0" uuid="3059f719-6c1e-4ef2-8fde-88fa11b435c0"/>
+			</rectangle>
+			<textField>
+				<reportElement x="356" y="39" width="175" height="20" uuid="89d88957-2c93-49d9-adda-9c226ff4dd9a"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="531" y="39" width="40" height="20" uuid="e1f9802f-6f14-4c1a-95a4-7e62a2b7a0f4"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="190" y="9" width="131" height="20" uuid="2663af0e-3305-4322-a541-d51fbbb57082"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total del estado:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="321" y="9" width="100" height="20" uuid="d556b875-9b6e-41fe-bb85-d8266d09f64e"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

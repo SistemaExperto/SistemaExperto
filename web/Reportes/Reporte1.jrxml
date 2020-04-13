@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="37774728-c075-4c97-b844-90c98f46cfca">
+	<property name="ireport.zoom" value="1.7715610000000013"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\marco\\OneDrive\\Documentos\\SistemaExperto\\web\\Reportes\\Subreportes2\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     familiar.`id` AS familiar_id,
+     familiar.`nombre` AS familiar_nombre,
+     familiar.`apaterno` AS familiar_apaterno,
+     familiar.`amaterno` AS familiar_amaterno,
+     familiar.`correo` AS familiar_correo,
+     familiar.`fechanac` AS familiar_fechanac,
+     familiar.`municipio` AS familiar_municipio,
+     familiar.`telefono` AS familiar_telefono,
+     vivienda.`id` AS vivienda_id,
+     vivienda.`material_piso` AS vivienda_material_piso,
+     vivienda.`material_pared` AS vivienda_material_pared,
+     vivienda.`acabado_pared` AS vivienda_acabado_pared,
+     vivienda.`material_techo` AS vivienda_material_techo,
+     vivienda.`tipo_sanitario` AS vivienda_tipo_sanitario,
+     vivienda.`drenaje` AS vivienda_drenaje,
+     vivienda.`familiar_idfamiliar` AS vivienda_familiar_idfamiliar,
+     probabilidad.`id` AS probabilidad_id,
+     probabilidad.`bayessi` AS probabilidad_bayessi,
+     probabilidad.`bayesno` AS probabilidad_bayesno,
+     probabilidad.`arbolsi` AS probabilidad_arbolsi,
+     probabilidad.`arbolno` AS probabilidad_arbolno,
+     probabilidad.`fecha_reg` AS probabilidad_fecha_reg,
+     probabilidad.`vivienda_idvivienda` AS probabilidad_vivienda_idvivienda
+FROM
+     `vivienda` vivienda INNER JOIN `familiar` familiar ON vivienda.`familiar_idfamiliar` = familiar.`id`
+     INNER JOIN `probabilidad` probabilidad ON vivienda.`id` = probabilidad.`vivienda_idvivienda`
+GROUP BY familiar.`id`]]>
+	</queryString>
+	<field name="familiar_id" class="java.lang.Integer"/>
+	<field name="familiar_nombre" class="java.lang.String"/>
+	<field name="familiar_apaterno" class="java.lang.String"/>
+	<field name="familiar_amaterno" class="java.lang.String"/>
+	<field name="familiar_correo" class="java.lang.String"/>
+	<field name="familiar_fechanac" class="java.sql.Date"/>
+	<field name="familiar_municipio" class="java.lang.String"/>
+	<field name="familiar_telefono" class="java.lang.String"/>
+	<field name="vivienda_id" class="java.lang.Integer"/>
+	<field name="vivienda_material_piso" class="java.lang.String"/>
+	<field name="vivienda_material_pared" class="java.lang.String"/>
+	<field name="vivienda_acabado_pared" class="java.lang.String"/>
+	<field name="vivienda_material_techo" class="java.lang.String"/>
+	<field name="vivienda_tipo_sanitario" class="java.lang.String"/>
+	<field name="vivienda_drenaje" class="java.lang.String"/>
+	<field name="vivienda_familiar_idfamiliar" class="java.lang.Integer"/>
+	<field name="probabilidad_id" class="java.lang.Integer"/>
+	<field name="probabilidad_bayessi" class="java.lang.Double"/>
+	<field name="probabilidad_bayesno" class="java.lang.Double"/>
+	<field name="probabilidad_arbolsi" class="java.lang.Double"/>
+	<field name="probabilidad_arbolno" class="java.lang.Double"/>
+	<field name="probabilidad_fecha_reg" class="java.sql.Timestamp"/>
+	<field name="probabilidad_vivienda_idvivienda" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="693" splitType="Stretch">
+			<rectangle radius="5">
+				<reportElement x="-1" y="59" width="573" height="27" forecolor="#F0F0F0" backcolor="#666666" uuid="aeb7045b-cbf1-42d1-91c3-b5d1aaf606f4"/>
+			</rectangle>
+			<rectangle radius="5">
+				<reportElement x="-1" y="0" width="573" height="59" forecolor="#333333" backcolor="#F0F0F0" uuid="e72c0f3d-266e-4aaf-80c9-2aa9b45f9e6b"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="331" y="35" width="41" height="18" uuid="8503af85-299c-41c3-a953-ed9fb4569d0f"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="230" y="63" width="322" height="20" forecolor="#FFFFFF" uuid="ab8a7e0c-d57c-4e4b-9e41-88790940082b"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[FAMILIARES CON PROBABILIDAD POR REGIÓN]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy hh:mm aa">
+				<reportElement x="372" y="35" width="182" height="18" uuid="1c39b5f0-0218-4436-8567-4dabfa72fdcb"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="355" y="6" width="166" height="32" uuid="079696b8-8f50-48a3-83f5-20c46f8ba9a6"/>
+				<textElement verticalAlignment="Middle">
+					<font size="18" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Sistema Experto]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="5" width="308" height="50" uuid="3381625f-419c-4dbc-8ef3-279b68778990"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Sistema experto que permite identificar la potencialidad de presentar enfermedades transmitidas por vector considerando la información de la infraestructura de la vivienda]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="0" y="229" width="571" height="149" uuid="68ad5802-ab34-4883-b0d2-683c2c134b08"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["..\\Reportes\\Subreportes2\\Zonacentro.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="1" y="378" width="571" height="162" uuid="aa051863-c4ab-457b-ba84-c527000ff578"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["..\\Reportes\\Subreportes2\\Zonaoriente.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement isPrintRepeatedValues="false" x="1" y="540" width="571" height="146" uuid="54bc1a98-d62e-47bf-b484-282e7cac759b"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["..\\Reportes\\Subreportes2\\Zonasureste.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="1" y="86" width="570" height="143" uuid="3e298b19-9549-40ba-a6cd-8b0688076c01"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA["..\\Reportes\\Subreportes2\\Zonanorte.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</title>
+	<pageFooter>
+		<band height="59" splitType="Stretch">
+			<textField evaluationTime="Report">
+				<reportElement x="532" y="39" width="40" height="20" uuid="b0edaf10-8f29-418d-b298-ec033f15e08e"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="311" y="39" width="221" height="20" uuid="84a610da-ba9a-4252-93c2-6976b19f8110"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Pagina "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<rectangle radius="5">
+				<reportElement x="0" y="3" width="572" height="33" forecolor="#333333" backcolor="#F0F0F0" uuid="e32183ba-5a7d-4a0f-bdf9-3a1d2e1e263f"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="207" y="9" width="113" height="20" uuid="38642055-0147-4968-a538-2e594e4bd53a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Total del estado:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="330" y="9" width="90" height="20" uuid="e7927b09-ea88-437d-a385-dce1ecad55a4"/>
+				<textElement verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

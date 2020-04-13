@@ -1,0 +1,487 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="eb1f8fa5-63a9-4467-96cb-8a9b6b2978d9">
+	<property name="ireport.zoom" value="1.771561000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="idvivienda" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+YEAR(CURDATE())-YEAR(familiar.`fechanac`)+IF(DATE_FORMAT(CURDATE(),'%m-%d')>DATE_FORMAT(familiar.`fechanac`,'%m-%d'),0,-1) AS edad,
+     familiar.`id` AS familiar_id,
+     familiar.`nombre` AS familiar_nombre,
+     familiar.`apaterno` AS familiar_apaterno,
+     familiar.`amaterno` AS familiar_amaterno,
+     familiar.`correo` AS familiar_correo,
+     familiar.`fechanac` AS familiar_fechanac,
+     familiar.`municipio` AS familiar_municipio,
+     familiar.`telefono` AS familiar_telefono,
+     probabilidad.`id` AS probabilidad_id,
+     probabilidad.`bayessi` AS probabilidad_bayessi,
+     probabilidad.`bayesno` AS probabilidad_bayesno,
+     probabilidad.`arbolsi` AS probabilidad_arbolsi,
+     probabilidad.`arbolno` AS probabilidad_arbolno,
+     probabilidad.`fecha_reg` AS probabilidad_fecha_reg,
+     probabilidad.`vivienda_idvivienda` AS probabilidad_vivienda_idvivienda,
+     vivienda.`id` AS vivienda_id,
+     vivienda.`material_piso` AS vivienda_material_piso,
+     vivienda.`material_pared` AS vivienda_material_pared,
+     vivienda.`acabado_pared` AS vivienda_acabado_pared,
+     vivienda.`material_techo` AS vivienda_material_techo,
+     vivienda.`tipo_sanitario` AS vivienda_tipo_sanitario,
+     vivienda.`drenaje` AS vivienda_drenaje,
+     vivienda.`familiar_idfamiliar` AS vivienda_familiar_idfamiliar,
+     historial.`id` AS historial_id,
+     historial.`fechareg` AS historial_fechareg,
+     historial.`bayes` AS historial_bayes,
+     historial.`arbol` AS historial_arbol,
+     historial.`probabilidad_idprobabilidad` AS historial_probabilidad_idprobabilidad,
+     recomendacion.`id` AS recomendacion_id,
+     recomendacion.`descripcion` AS recomendacion_descripcion,
+     recomendacion.`probabilidad_idprobabilidad` AS recomendacion_probabilidad_idprobabilidad
+FROM
+     `probabilidad` probabilidad INNER JOIN `historial` historial ON probabilidad.`id` = historial.`probabilidad_idprobabilidad`
+     INNER JOIN `vivienda` vivienda ON probabilidad.`vivienda_idvivienda` = vivienda.`id`
+     INNER JOIN `recomendacion` recomendacion ON probabilidad.`id` = recomendacion.`probabilidad_idprobabilidad`
+     INNER JOIN `familiar` familiar ON vivienda.`familiar_idfamiliar` = familiar.`id`
+WHERE vivienda.`id` = $P{idvivienda}
+ORDER BY historial.`id` DESC]]>
+	</queryString>
+	<field name="edad" class="java.lang.Integer"/>
+	<field name="familiar_id" class="java.lang.Integer"/>
+	<field name="familiar_nombre" class="java.lang.String"/>
+	<field name="familiar_apaterno" class="java.lang.String"/>
+	<field name="familiar_amaterno" class="java.lang.String"/>
+	<field name="familiar_correo" class="java.lang.String"/>
+	<field name="familiar_fechanac" class="java.sql.Date"/>
+	<field name="familiar_municipio" class="java.lang.String"/>
+	<field name="familiar_telefono" class="java.lang.String"/>
+	<field name="probabilidad_id" class="java.lang.Integer"/>
+	<field name="probabilidad_bayessi" class="java.lang.Double"/>
+	<field name="probabilidad_bayesno" class="java.lang.Double"/>
+	<field name="probabilidad_arbolsi" class="java.lang.Double"/>
+	<field name="probabilidad_arbolno" class="java.lang.Double"/>
+	<field name="probabilidad_fecha_reg" class="java.sql.Timestamp"/>
+	<field name="probabilidad_vivienda_idvivienda" class="java.lang.Integer"/>
+	<field name="vivienda_id" class="java.lang.Integer"/>
+	<field name="vivienda_material_piso" class="java.lang.String"/>
+	<field name="vivienda_material_pared" class="java.lang.String"/>
+	<field name="vivienda_acabado_pared" class="java.lang.String"/>
+	<field name="vivienda_material_techo" class="java.lang.String"/>
+	<field name="vivienda_tipo_sanitario" class="java.lang.String"/>
+	<field name="vivienda_drenaje" class="java.lang.String"/>
+	<field name="vivienda_familiar_idfamiliar" class="java.lang.Integer"/>
+	<field name="historial_id" class="java.lang.Integer"/>
+	<field name="historial_fechareg" class="java.sql.Timestamp"/>
+	<field name="historial_bayes" class="java.lang.String"/>
+	<field name="historial_arbol" class="java.lang.String"/>
+	<field name="historial_probabilidad_idprobabilidad" class="java.lang.Integer"/>
+	<field name="recomendacion_id" class="java.lang.Integer"/>
+	<field name="recomendacion_descripcion" class="java.lang.String"/>
+	<field name="recomendacion_probabilidad_idprobabilidad" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="88" splitType="Stretch">
+			<rectangle radius="5">
+				<reportElement x="-1" y="60" width="573" height="27" forecolor="#F0F0F0" backcolor="#666666" uuid="a030a72f-69b5-4c05-aaaa-fcb22bd9f9d7"/>
+			</rectangle>
+			<rectangle radius="5">
+				<reportElement x="-1" y="1" width="573" height="59" forecolor="#333333" backcolor="#F0F0F0" uuid="08f3653a-d056-4d33-af87-3b7fea2da8b6"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="331" y="36" width="41" height="18" uuid="edaf3944-1136-4b8c-be42-134e0c17da1a"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<text><![CDATA[Fecha:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="355" y="7" width="177" height="32" uuid="02e5ed7a-9526-4860-ad3f-cadb6fd6982a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="18" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Sistema Experto]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy hh:mm aa">
+				<reportElement x="372" y="36" width="182" height="18" uuid="99bbbce2-8b33-4f38-bb74-acdc67a975bb"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="230" y="64" width="322" height="20" forecolor="#FFFFFF" uuid="48276427-73cf-4ac8-9ecb-4b58cb216b58"/>
+				<textElement textAlignment="Right">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[PROBABILIDAD POR VIVIENDA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="12" y="6" width="308" height="50" uuid="4da5f317-2edd-41df-afb6-b46c973be673"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<text><![CDATA[Sistema experto que permite identificar la potencialidad de presentar enfermedades transmitidas por vector considerando la información de la infraestructura de la vivienda]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="517" splitType="Stretch">
+			<rectangle radius="5">
+				<reportElement x="306" y="24" width="259" height="110" forecolor="#333333" backcolor="#FFFFFF" uuid="f652fa40-9634-4d50-83f0-08aa2c3d5f03"/>
+			</rectangle>
+			<rectangle radius="5">
+				<reportElement x="11" y="24" width="295" height="110" forecolor="#333333" backcolor="#FFFFFF" uuid="18efbb24-0fa0-4c44-9601-e9c4876107e4"/>
+			</rectangle>
+			<textField>
+				<reportElement x="87" y="29" width="100" height="20" uuid="b357f495-e135-44e6-a72b-3dffe97ee48a"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{familiar_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="206" y="49" width="100" height="20" uuid="28283f5a-ca84-4f8f-af95-13ed0e928469"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{familiar_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="87" y="49" width="60" height="20" uuid="dcd209b8-e3c3-4549-b284-7e238a52d240"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{familiar_apaterno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="147" y="49" width="59" height="20" uuid="1aee17c5-83e4-4200-9bc6-4688373600ef"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{familiar_amaterno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="87" y="69" width="188" height="20" uuid="7850e115-6957-4750-a61a-f43ecedecabd"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{familiar_correo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="218" y="108" width="57" height="20" uuid="18de3e69-7721-4ba7-8627-6a8ee2d0b293"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{edad}+" Años"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="87" y="89" width="100" height="20" uuid="cff5403c-4327-454e-89b9-839b55a87339"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{familiar_municipio}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="87" y="109" width="86" height="20" uuid="28bdafc4-a51e-493e-a293-a30b8617c078"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{familiar_telefono}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="22" y="29" width="62" height="20" uuid="6b6ed4e2-4266-47a3-bd99-60e8ba1fc870"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="22" y="49" width="62" height="20" uuid="619a785d-9b09-4626-92bf-733a5255481f"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[NOMBRE: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="22" y="69" width="62" height="20" uuid="77f6d40b-068f-485e-bb40-f0816965017a"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CORREO: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="173" y="109" width="43" height="20" uuid="a3fa5616-72e3-41d0-8da5-8bffe8399e8f"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[EDAD: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="22" y="89" width="62" height="20" uuid="07e4c02d-70f6-4520-8642-4d308b9dac02"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MUNICIPIO: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="22" y="109" width="62" height="20" uuid="806761b4-6248-42d0-9871-29176bba070a"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TELÉFONO: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="106" y="2" width="100" height="20" uuid="9da8ecc5-5265-4d06-9243-f4443c183753"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FAMILIAR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="373" y="2" width="129" height="20" uuid="a8b939ad-adb7-47b4-98af-08fe70228310"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PROBABILIDAD]]></text>
+			</staticText>
+			<rectangle radius="5">
+				<reportElement x="11" y="161" width="554" height="144" forecolor="#333333" backcolor="#F0F0F0" uuid="bfd0e27f-f47b-434f-a99f-9aae92fa3f3b"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="331" y="46" width="101" height="20" uuid="9d780b67-2c00-4343-9cdc-e5ebcc0a320b"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PROBABILIDAD: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="331" y="66" width="101" height="20" uuid="e0f1713a-f2fd-4cd1-96c3-2510ed34deb1"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CLASIFICACIÓN: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="331" y="86" width="101" height="20" uuid="0ffdf797-2a07-4f78-b300-4bcc13cdc41f"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA REGISTRO: ]]></text>
+			</staticText>
+			<rectangle radius="5">
+				<reportElement x="11" y="333" width="554" height="121" forecolor="#333333" backcolor="#FFFFFF" uuid="f5750ebe-b340-437e-9711-e6315c1fcabe"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="22" y="336" width="78" height="20" uuid="fcf35a22-c509-4ad5-9c91-560816968867"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESCRIPCIÓN: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="22" y="357" width="530" height="95" uuid="eb1f97f0-d162-4dd1-9fd0-4c6faba11dda"/>
+				<textElement textAlignment="Justified">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{recomendacion_descripcion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="223" y="309" width="129" height="20" uuid="0ec009db-faf3-4b33-a89f-da64f8b3fab5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RECOMENDACIÓN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="226" y="137" width="129" height="20" uuid="dec37a6f-1510-4506-baae-2cbabafa6c07"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[VIVIENDA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="22" y="163" width="101" height="20" uuid="60ada38c-1ca0-4e76-acfa-f8e7fcc1ae64"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MATERIAL PISO: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="23" y="204" width="101" height="20" uuid="4e6e8483-8cb6-41af-9a93-3ff68ebd0e97"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MATERIAL PARED: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="23" y="264" width="101" height="20" uuid="c7d429dc-c0b4-46bc-a52b-d923e0e4d987"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ACABADO PARED: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="295" y="163" width="101" height="20" uuid="8c22dd22-ea9e-4a31-9588-1d5fd9f6395b"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[MATERIAL TECHO: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="295" y="240" width="101" height="20" uuid="dfc56e43-f284-43d2-bf3f-81ef5d966166"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[TIPO SANITARIO: ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="296" y="282" width="69" height="20" uuid="d0125ecd-c104-43d0-95a6-5f2a4a9e89e2"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DRENAJE: ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="23" y="183" width="262" height="21" uuid="117c09b0-fcf3-4fc9-bb26-456ab2316701"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vivienda_material_piso}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="23" y="224" width="252" height="40" uuid="d62b4012-2081-4496-830c-dc28ddc05419"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vivienda_material_pared}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="24" y="282" width="249" height="20" uuid="900168e5-f11e-43bd-98b0-b0deb64c3ed8"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vivienda_acabado_pared}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="296" y="183" width="257" height="57" uuid="02c6bc92-3df0-472a-9b31-870582e390e2"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vivienda_material_techo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="296" y="260" width="256" height="22" uuid="a2d2a133-5ff4-4756-bc71-af67e618e3e2"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vivienda_tipo_sanitario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="365" y="282" width="100" height="20" uuid="134f285a-9f93-470f-b386-603b27db77c1"/>
+				<textElement verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{vivienda_drenaje}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="443" y="46" width="89" height="20" uuid="6d6ed499-5f2c-47fb-988f-f164f888c6d3"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{probabilidad_bayessi}+" %"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="443" y="66" width="89" height="20" uuid="6badc877-e147-4982-9e34-8d72a0b0159b"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[($F{probabilidad_arbolsi}!=0.00)?"Sí":"No"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="443" y="86" width="100" height="20" uuid="13ecfdea-9f7a-4feb-a758-e41d66e438d0"/>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{probabilidad_fecha_reg}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="226" y="456" width="129" height="20" uuid="a2caa398-bae3-4bde-be9d-01ae9651a878"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[HISTORIAL]]></text>
+			</staticText>
+			<rectangle radius="5">
+				<reportElement x="12" y="478" width="554" height="27" forecolor="#333333" backcolor="#F0F0F0" uuid="2bf9d9e3-04d6-4064-8ebb-127c53a8bf92"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="16" y="482" width="20" height="20" uuid="5c47454a-477e-4851-9d5e-48cd85e3bc59"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="38" y="482" width="215" height="20" uuid="3dddccff-bd95-4cbe-bafa-5b548ceea40c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[PROBABILIDAD]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="254" y="482" width="221" height="20" uuid="af972bc3-aebf-44f6-9f70-ab30aa07b3cd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CLASIFICACIÓN]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="476" y="482" width="87" height="20" uuid="d918220c-508c-4dde-b91e-f76731298181"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="42" splitType="Stretch">
+			<textField>
+				<reportElement x="38" y="2" width="215" height="30" uuid="d030b60f-4836-46ce-8b2c-afda0edaf62e"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{historial_bayes}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="254" y="2" width="221" height="30" uuid="6d5c9b7a-f292-49e6-bd28-14171e0b6c49"/>
+				<textElement textAlignment="Center" verticalAlignment="Top">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{historial_arbol}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="476" y="2" width="87" height="20" uuid="5108aa90-2a68-4f07-9c58-192ada04ed98"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{historial_fechareg}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="16" y="2" width="20" height="20" uuid="1421498c-4c5f-476c-84de-c7c87e00214b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{historial_id}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement x="16" y="35" width="547" height="1" uuid="7275ff3c-216a-4368-a3e9-d9127fbbbade"/>
+			</line>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="28" splitType="Stretch">
+			<textField>
+				<reportElement x="373" y="4" width="159" height="20" uuid="512a9635-2722-44c8-8da9-6bcdc5df2dad"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="532" y="4" width="40" height="20" uuid="d2cd2a60-a70c-4e72-9268-12bc2a9404ca"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

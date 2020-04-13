@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="612" pageHeight="792" columnWidth="612" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="d404dd4e-8edc-482a-96cd-edf42c3848b9">
+	<property name="ireport.zoom" value="1.771561000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     YEAR(CURDATE())-YEAR(familiar.`fechanac`)+IF(DATE_FORMAT(CURDATE(),'%m-%d')>DATE_FORMAT(familiar.`fechanac`,'%m-%d'),0,-1) AS edad,
+     familiar.`id` AS familiar_id,
+     familiar.`nombre` AS familiar_nombre,
+     familiar.`apaterno` AS familiar_apaterno,
+     familiar.`amaterno` AS familiar_amaterno,
+     familiar.`correo` AS familiar_correo,
+     familiar.`fechanac` AS familiar_fechanac,
+     familiar.`municipio` AS familiar_municipio,
+     familiar.`telefono` AS familiar_telefono
+FROM
+     `familiar` familiar
+WHERE
+     familiar.`municipio` IN ('Tlaquiltenango','Jojutla','Zacatepec','Puente de Ixtla','Amacuzac','Coatlán del Río','Tetecala','Mazatepec','Miacatlán','Coatetelco','Xoxocotla')]]>
+	</queryString>
+	<field name="edad" class="java.lang.Integer"/>
+	<field name="familiar_id" class="java.lang.Integer"/>
+	<field name="familiar_nombre" class="java.lang.String"/>
+	<field name="familiar_apaterno" class="java.lang.String"/>
+	<field name="familiar_amaterno" class="java.lang.String"/>
+	<field name="familiar_correo" class="java.lang.String"/>
+	<field name="familiar_fechanac" class="java.sql.Date"/>
+	<field name="familiar_municipio" class="java.lang.String"/>
+	<field name="familiar_telefono" class="java.lang.String"/>
+	<variable name="edad_1" class="java.lang.Integer" calculation="Average">
+		<variableExpression><![CDATA[$F{edad}]]></variableExpression>
+	</variable>
+	<title>
+		<band height="32" splitType="Stretch">
+			<staticText>
+				<reportElement x="12" y="4" width="140" height="27" uuid="54272c59-bd72-478e-97aa-bf56cc4bc09a"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Zona Sur Oeste]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="32" splitType="Stretch">
+			<rectangle radius="5">
+				<reportElement x="0" y="4" width="562" height="24" backcolor="#FFFFCC" uuid="11a1490e-484f-49eb-ae68-bef4ca8086d2"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="41" y="6" width="109" height="20" uuid="d1d55ba3-14fb-4a17-8a82-f6387914921f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="311" y="6" width="81" height="20" uuid="fee99574-5174-4902-bba8-03d850a2cf04"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Teléfono]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="505" y="6" width="74" height="20" uuid="0577777c-855c-4387-bbde-ac59583e9d61"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Edad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="6" width="31" height="20" uuid="653b4a51-dae0-4009-bda0-09794175830c"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="231" y="6" width="81" height="20" uuid="686a01bb-f712-472f-bfa8-c31dd76ba1ec"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Materno]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="150" y="6" width="81" height="20" uuid="1e768cdb-17ab-40d4-88fa-a0f332bac521"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Paterno]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="391" y="6" width="114" height="20" uuid="9a38f602-e153-40bf-a2ef-89fa431ec875"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Correo Electrónico]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="41" y="0" width="109" height="20" uuid="686e1975-14a8-4659-b317-c0edeca2527e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{familiar_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="392" y="0" width="114" height="20" uuid="db94a908-b638-4a8b-89c8-bacb09c37de5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{familiar_correo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="11" y="0" width="31" height="20" uuid="998d914b-b54f-427e-8ef0-c62f1c6d06ae"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{familiar_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="231" y="0" width="81" height="20" uuid="96efe441-c54d-4cfd-9fb7-be21438df435"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{familiar_amaterno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="505" y="0" width="74" height="20" uuid="5be4a690-6ade-43e9-9ea4-38f6efe3d7c4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{edad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="150" y="0" width="81" height="20" uuid="f52dfe20-1f94-4dc4-ae04-51ca3f8da581"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{familiar_apaterno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="312" y="0" width="81" height="20" uuid="9560c33b-eae4-4c0e-8d3d-9ef6c9c7a461"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{familiar_telefono}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="30">
+			<textField>
+				<reportElement x="534" y="10" width="45" height="20" uuid="b7f4d90d-65e5-48bb-bf95-64158ce11d55"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="450" y="10" width="69" height="20" uuid="b89b28ee-fc4c-4d20-97cc-517ffc34c4bd"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Total Zona:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="5" width="562" height="1" uuid="8dfb77bc-e9a2-4d85-a8db-c21fc5492a89"/>
+			</line>
+			<staticText>
+				<reportElement x="25" y="10" width="125" height="20" uuid="7ae46e88-2400-47aa-b7e1-94237b2c47b0"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Edad Promedio Zona:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="167" y="10" width="100" height="20" uuid="815ad919-f71a-45e8-b5a2-3282e2cfd3ed"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{edad_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

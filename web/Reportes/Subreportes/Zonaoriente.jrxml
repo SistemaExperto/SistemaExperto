@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="612" pageHeight="792" columnWidth="612" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="6c9c3d12-6da4-49ae-894d-661edfd3a719">
+	<property name="ireport.zoom" value="1.771561000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     YEAR(CURDATE())-YEAR(familiar.`fechanac`)+IF(DATE_FORMAT(CURDATE(),'%m-%d')>DATE_FORMAT(familiar.`fechanac`,'%m-%d'),0,-1) AS edad,
+     familiar.`id` AS familiar_id,
+     familiar.`nombre` AS familiar_nombre,
+     familiar.`apaterno` AS familiar_apaterno,
+     familiar.`amaterno` AS familiar_amaterno,
+     familiar.`correo` AS familiar_correo,
+     familiar.`fechanac` AS familiar_fechanac,
+     familiar.`municipio` AS familiar_municipio,
+     familiar.`telefono` AS familiar_telefono
+FROM
+     `familiar` familiar
+WHERE
+     familiar.`municipio` IN ('Zacualpan de Amilpas','Jantetelco','Jonacatepec de Leandro Valle','Tepalcingo','Axochiapan','Temoac','Hueyapan')]]>
+	</queryString>
+	<field name="edad" class="java.lang.Integer"/>
+	<field name="familiar_id" class="java.lang.Integer"/>
+	<field name="familiar_nombre" class="java.lang.String"/>
+	<field name="familiar_apaterno" class="java.lang.String"/>
+	<field name="familiar_amaterno" class="java.lang.String"/>
+	<field name="familiar_correo" class="java.lang.String"/>
+	<field name="familiar_fechanac" class="java.sql.Date"/>
+	<field name="familiar_municipio" class="java.lang.String"/>
+	<field name="familiar_telefono" class="java.lang.String"/>
+	<variable name="edad_1" class="java.lang.Integer" calculation="Average">
+		<variableExpression><![CDATA[$F{edad}]]></variableExpression>
+	</variable>
+	<title>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="13" y="3" width="121" height="27" uuid="d75be58d-f27a-4248-9c10-baac2d0a5088"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Zona Oriente]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="30" splitType="Stretch">
+			<rectangle radius="5">
+				<reportElement x="1" y="3" width="562" height="24" backcolor="#CCFFCC" uuid="84cedc3d-fd94-43df-989d-67739f17591a"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="41" y="7" width="109" height="20" uuid="658f2594-a77a-4364-b041-71d80c23fddb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="311" y="7" width="81" height="20" uuid="3f3e7310-033f-407e-870e-ac625e7b784b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Teléfono]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="505" y="7" width="74" height="20" uuid="66b58aa7-c7ea-4127-a4af-86789a40962e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Edad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="10" y="7" width="31" height="20" uuid="66c1a230-453a-45c9-a8de-2007d8aa4fb3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[ID]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="231" y="7" width="81" height="20" uuid="a5ae1abb-c52e-4312-85e4-9998437fc949"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Materno]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="150" y="7" width="81" height="20" uuid="d590d397-e522-4f9b-9b4e-c8c38b159330"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Paterno]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="391" y="7" width="114" height="20" uuid="0e08a56d-9913-4479-a89c-69aff20d4dc7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Correo Electrónico]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="40" y="1" width="109" height="20" uuid="2bcaefad-fc25-4b12-97f9-975c32119981"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{familiar_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="391" y="1" width="114" height="20" uuid="3c5f2adb-14d9-4e1a-92aa-56b235ba1bc0"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{familiar_correo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="1" width="31" height="20" uuid="6dff7d70-bc4a-426f-83d0-91de563287bc"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{familiar_id}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="230" y="1" width="81" height="20" uuid="54fbc291-3df5-49d6-b5b5-9363567a9229"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{familiar_amaterno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="504" y="1" width="74" height="20" uuid="de01706e-61a9-4e24-97df-7e46c5da6649"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{edad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="149" y="1" width="81" height="20" uuid="a8abd8a1-d988-4b02-bf10-854e765aecef"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{familiar_apaterno}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="311" y="1" width="81" height="20" uuid="4216dbf5-3dbb-4899-8438-60d7a060cbf3"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{familiar_telefono}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="32">
+			<textField>
+				<reportElement x="534" y="10" width="45" height="20" uuid="413923b8-0cf7-4433-a421-6bdb6d5b6177"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{COLUMN_COUNT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="449" y="10" width="69" height="20" uuid="313d3fdc-8b8f-45f8-b0c3-cb3b1985c0af"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Total Zona:]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="6" width="562" height="1" uuid="f6a3f7bd-79ea-42f1-be4d-d150f1885724"/>
+			</line>
+			<staticText>
+				<reportElement x="25" y="11" width="125" height="20" uuid="f0f50c9d-ef1a-4451-95e6-1cdf87f7a4fd"/>
+				<textElement>
+					<font size="12" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Edad Promedio Zona:]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="167" y="12" width="100" height="20" uuid="e5cd0aae-e8b6-45c9-b2d8-9350186f5c10"/>
+				<textElement>
+					<font size="12"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{edad_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>
